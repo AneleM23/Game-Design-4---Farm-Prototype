@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Item_Manager item_manager;
+
+    public TileManager tile_manager;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -22,5 +24,6 @@ public class GameManager : MonoBehaviour
 
 
         item_manager = GetComponent<Item_Manager>();
+        tile_manager = GetComponent<TileManager>(); 
     }
 }

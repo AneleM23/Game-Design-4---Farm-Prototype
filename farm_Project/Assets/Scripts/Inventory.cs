@@ -9,14 +9,14 @@ public class Inventory
     [System.Serializable]
     public class slot
     {
-        public CollectableType type;
+        public string itemName;
         public int count;
         public int maxAllowed;
 
         public Sprite icon;
         public slot()
         {
-            type = CollectableType.NONE;
+            itemName = "";
             count = 0;
             maxAllowed = 99;
         }
@@ -29,10 +29,10 @@ public class Inventory
             return false;
         }
 
-        public void Additem(collectable item) 
+        public void Additem(Item item) 
         {
-            this.type = item.type;
-            this.icon = item.Icon;
+            this.itemName = item.data.itemName;
+            this.icon = item.data.icon;
             count++;
         }
         public void RemoveItem()
@@ -43,7 +43,7 @@ public class Inventory
                 if (count == 0)
                 {
                     icon = null;
-                    type = CollectableType.NONE;
+                    itemName = "";
                 }
 
             }
@@ -60,11 +60,11 @@ public class Inventory
             slots.Add(slot);
         }
     }
-    public void Add(collectable item)
+    public void Add(Item item)
     {
         foreach (slot slot in slots)
         {
-            if (slot.type == item.type && slot.CanAddItem())
+            if (slot.itemName == item.data.itemName && slot.CanAddItem())
             {
                 slot.Additem(item);
                 return;
@@ -72,7 +72,7 @@ public class Inventory
         }
         foreach (slot slot in slots)
         {
-            if (slot.type == CollectableType.NONE)
+            if (slot.itemName == "")
             {
                 slot.Additem(item);
                 return;
