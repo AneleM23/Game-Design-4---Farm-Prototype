@@ -2,88 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class Inventory
+public class Inventory : MonoBehaviour
 {
-    [System.Serializable]
-    public class slot
+    private List<GameObject> items = new List<GameObject>();
+
+    public GameObject inventoryUI;
+
+    public void AddItem(GameObject item)
     {
-        public CollectableType type;
-        public int count;
-        public int maxAllowed;
+        items.Add(item);
+    }
 
-        public Sprite icon;
-        public slot()
-        {
-            type = CollectableType.NONE;
-            count = 0;
-            maxAllowed = 99;
-        }
-        public bool CanAddItem()
-        {
-            if (count<maxAllowed)
-            {
-                return true;
-            }
-            return false;
-        }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
-        public void Additem(collectable item) 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            this.type = item.type;
-            this.icon = item.Icon;
-            count++;
-        }
-        public void RemoveItem()
-        {
-            if (count > 0)
-            {
-                count--;
-                if (count == 0)
-                {
-                    icon = null;
-                    type = CollectableType.NONE;
-                }
-
-            }
+            inventoryUI.SetActive(true);
         }
     }
 
-    public List<slot> slots = new List<slot>();
-
-    public Inventory(int numSlots)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        for (int i = 0; i < numSlots; i++)
+        if (other.CompareTag("Player"))
         {
-            slot slot = new slot();
-            slots.Add(slot);
+            
+            inventoryUI.SetActive(false);
         }
-    }
-    public void Add(collectable item)
-    {
-        foreach (slot slot in slots)
-        {
-            if (slot.type == item.type && slot.CanAddItem())
-            {
-                slot.Additem(item);
-                return;
-            }
-        }
-        foreach (slot slot in slots)
-        {
-            if (slot.type == CollectableType.NONE)
-            {
-                slot.Additem(item);
-                return;
-            }
-        }
-                
-    }
-
-    public void Remove(int index)
-    {
-        slots[index].RemoveItem();
     }
 
 }

@@ -4,11 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
-
-
-
-
 public class Slots : MonoBehaviour
 {
     public Image itemIcon;
