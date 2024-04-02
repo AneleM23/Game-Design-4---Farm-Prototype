@@ -9,7 +9,7 @@ public class Slots : MonoBehaviour
     public Image itemIcon;
     public TextMeshProUGUI quantityText;
 
-    public void SetItem(Inventory.slot slot)
+    public void SetItem(Inventory.Slot slot)
     {
         if (slot != null)
         {
