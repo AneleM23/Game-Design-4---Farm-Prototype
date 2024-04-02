@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Inventory;
 
 public class Inventory_UI : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public player player;
     public List<Slots> slots=new List<Slots>();
+
+   
     // Update is called once per frame
     void Update()
     {
@@ -31,7 +34,7 @@ public class Inventory_UI : MonoBehaviour
 
     void refresh()
     {
-        if (slots.Count == player.inventory.slots.Count)
+        if (slots.Count == player.inventory.Slots.Count)
         {
             for (int i = 0; i < slots.Count; i++)
             {
