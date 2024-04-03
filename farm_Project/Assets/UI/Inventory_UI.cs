@@ -5,11 +5,19 @@ using static Inventory;
 
 public class Inventory_UI : MonoBehaviour
 {
+    public class Slot
+    {
+        public string itemName;
+        public Sprite icon;
+        public int count;
+    }
+
     public GameObject inventoryPanel;
     public player player;
     public List<Slots> slots=new List<Slots>();
 
-   
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -34,13 +42,20 @@ public class Inventory_UI : MonoBehaviour
 
     void refresh()
     {
-        if (slots.Count == player.inventory.Slots.Count)
+        if (slots.Count == player.inventory.slots.Count)
         {
             for (int i = 0; i < slots.Count; i++)
             {
                 if (player.inventory.slots[i].itemName != "")
                 {
-                    slots[i].SetItem(player.inventory.slots[i]);
+                    // Replace the problematic line with the corrected code
+                    Inventory_UI.Slot inventorySlot = new Inventory_UI.Slot
+                    {
+                        itemName = player.inventory.slots[i].itemName,
+                        icon = player.inventory.slots[i].icon,
+                        count = player.inventory.slots[i].count
+                    };
+                    slots[i].SetItem(inventorySlot);
                 }
                 else
                 {
@@ -48,6 +63,7 @@ public class Inventory_UI : MonoBehaviour
                 }
             }
         }
+
     }
 
     public void Remove(int slotID)
